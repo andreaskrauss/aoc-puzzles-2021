@@ -1,19 +1,22 @@
 class Submarine:
     y: int     # depth
     x: int     # position
+    aim: int   # current gradient
 
-    def __init__(self, position: int = 0, depth: int = 0):
+    def __init__(self, position: int = 0, depth: int = 0, aim: int = 0):
         self.x = position
         self.y = depth
+        self.aim = aim
 
     def down(self, delta: int):
-        self.y = self.y + delta
+        self.aim = self.aim + delta
 
     def up(self, delta: int):
-        self.y = self.y - delta
+        self.aim = self.aim - delta
 
     def forward(self, delta: int):
         self.x = self.x + delta
+        self.y = self.y + delta * self.aim
 
     def parseCall(self, command: str):
         call, delta = command.split(" ")
